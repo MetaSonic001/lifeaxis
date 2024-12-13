@@ -8,7 +8,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <img src="/logo.svg" alt="DocDial Logo" className="h-10 w-auto mr-4" />
+            <img src="/favicon.ico" alt="DocDial Logo" className="h-10 w-auto mr-4" />
             <h1 className="text-2xl font-bold text-blue-800">DocDial</h1>
           </div>
           <nav className="hidden lg:flex space-x-6">
