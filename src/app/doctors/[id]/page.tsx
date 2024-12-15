@@ -1,10 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Card,
   CardContent,
@@ -12,21 +9,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { doctors, reviews } from "@/lib/data";
+import { motion } from "framer-motion";
 import {
-  Phone,
-  Mail,
-  MapPin,
-  Star,
-  Video,
+  Award,
+  Building2,
   CalendarIcon,
   Clock,
-  Building2,
-  Languages,
   GraduationCap,
-  Award,
+  Languages,
+  Mail,
+  MapPin,
+  Phone,
+  Star,
+  Video,
 } from "lucide-react";
-import { motion } from "framer-motion";
-import { doctors, reviews } from "@/lib/data";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function DoctorProfilePage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
