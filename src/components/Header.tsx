@@ -74,6 +74,15 @@ export default function Header() {
                 <Menu className="h-6 w-6" />
               </Button>
             </Link>
+            <Link href="/doctor-portal">
+              <Button
+                variant="outline"
+                className="text-blue-800 border-blue-800 hover:bg-blue-50"
+              >
+                <User className="w-5 h-5 mr-2" />
+                Go to Doctor Portal
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
