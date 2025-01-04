@@ -66,9 +66,9 @@ export default function Header() {
                 Sign In
               </Button>
             </Link>
-            <Link href="/sign-up">
+            <Link href="/patient-portal">
               <Button className="bg-blue-800 text-white hover:bg-blue-900">
-                Sign Up
+                Go to Patient Portal
               </Button>
               <Button variant="ghost" className="lg:hidden text-blue-800">
                 <Menu className="h-6 w-6" />
