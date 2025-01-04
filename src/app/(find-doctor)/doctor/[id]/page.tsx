@@ -1,56 +1,90 @@
 'use client'
 
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
-const doctors = [
-{ 
-  id: "1", 
-  name: "Dr. Emily Johnson", 
-  specialty: "Cardiologist", 
-  hospital: "City Heart Center", 
-  avgFee: 150, 
-  rating: 4.8, 
-  location: "Downtown", 
-  image: "/placeholder.svg?height=300&width=300",
-  experience: "15 years",
-  education: "MD in Cardiology, Harvard Medical School",
-  about: "Dr. Emily Johnson is a board-certified cardiologist with over 15 years of experience in treating various heart conditions. She specializes in preventive cardiology and heart failure management.",
-  services: [
-    "Echocardiography",
-    "Stress Testing",
-    "Holter Monitoring",
-    "Cardiac Catheterization",
-  ],
-  availability: [
-    { day: "Monday", time: "9:00 AM - 5:00 PM" },
-    { day: "Wednesday", time: "10:00 AM - 6:00 PM" },
-    { day: "Friday", time: "9:00 AM - 3:00 PM" },
-  ],
-  reviews: [
-    { id: 1, patient: "John D.", rating: 5, comment: "Dr. Johnson is extremely knowledgeable and caring. She took the time to explain everything in detail." },
-    { id: 2, patient: "Sarah M.", rating: 4, comment: "Very professional and thorough. The wait time was a bit long, but the care was excellent." },
-  ],
-  languages: ["English", "Spanish"],
-  awards: [
-    "Best Cardiologist 2022",
-    "Research Excellence Award 2020",
-    "Patient's Choice Award 2019"
-  ],
-  publications: [
-    "Johnson, E. et al. (2021). 'Advances in Preventive Cardiology'. Journal of Cardiovascular Medicine.",
-    "Johnson, E. & Smith, J. (2020). 'Long-term Outcomes of Heart Failure Management'. Cardiology Review."
-  ],
-  professionalMemberships: [
-    "American College of Cardiology",
-    "American Heart Association",
-    "Society for Cardiovascular Angiography and Interventions"
-  ]
-},
+interface Availability {
+  day: string;
+  time: string;
+}
+
+interface Review {
+  id: number;
+  patient: string;
+  rating: number;
+  comment: string;
+}
+
+interface Doctor {
+  id: string;
+  name: string;
+  specialty: string;
+  hospital: string;
+  avgFee: number;
+  rating: number;
+  location: string;
+  image: string;
+  experience: string;
+  education: string;
+  about: string;
+  services: string[];
+  availability: Availability[];
+  reviews: Review[];
+  languages: string[];
+  awards: string[];
+  publications: string[];
+  professionalMemberships: string[];
+}
+
+const doctors: Doctor[] = [
+  { 
+    id: "1", 
+    name: "Dr. Emily Johnson", 
+    specialty: "Cardiologist", 
+    hospital: "City Heart Center", 
+    avgFee: 150, 
+    rating: 4.8, 
+    location: "Downtown", 
+    image: "/placeholder.svg?height=300&width=300",
+    experience: "15 years",
+    education: "MD in Cardiology, Harvard Medical School",
+    about: "Dr. Emily Johnson is a board-certified cardiologist with over 15 years of experience in treating various heart conditions. She specializes in preventive cardiology and heart failure management.",
+    services: [
+      "Echocardiography",
+      "Stress Testing",
+      "Holter Monitoring",
+      "Cardiac Catheterization",
+    ],
+    availability: [
+      { day: "Monday", time: "9:00 AM - 5:00 PM" },
+      { day: "Wednesday", time: "10:00 AM - 6:00 PM" },
+      { day: "Friday", time: "9:00 AM - 3:00 PM" },
+    ],
+    reviews: [
+      { id: 1, patient: "John D.", rating: 5, comment: "Dr. Johnson is extremely knowledgeable and caring. She took the time to explain everything in detail." },
+      { id: 2, patient: "Sarah M.", rating: 4, comment: "Very professional and thorough. The wait time was a bit long, but the care was excellent." },
+    ],
+    languages: ["English", "Spanish"],
+    awards: [
+      "Best Cardiologist 2022",
+      "Research Excellence Award 2020",
+      "Patient's Choice Award 2019"
+    ],
+    publications: [
+      "Johnson, E. et al. (2021). 'Advances in Preventive Cardiology'. Journal of Cardiovascular Medicine.",
+      "Johnson, E. & Smith, J. (2020). 'Long-term Outcomes of Heart Failure Management'. Cardiology Review."
+    ],
+    professionalMemberships: [
+      "American College of Cardiology",
+      "American Heart Association",
+      "Society for Cardiovascular Angiography and Interventions"
+    ]
+  },
 ]
 
 export default function DoctorProfile() {
@@ -148,16 +182,14 @@ export default function DoctorProfile() {
                 ))}
               </ul>
             </TabsContent>
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-      <CardFooter>
-        <Button asChild className="w-full">
-          <Link href={`/book-appointment/${doctor.hospital}/${doctor.id}`}>Book Appointment</Link>
-        </Button>
-      </CardFooter>
-    </Card>
-  </div>
-)
+          </Tabs>
+        </CardContent>
+        <CardFooter>
+          <Button asChild className="w-full">
+            <Link href={`/book-appointment/${doctor.hospital}/${doctor.id}`}>Book Appointment</Link>
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
+  )
 }
-

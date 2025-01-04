@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { AlertTriangle, Clock, MapPin, Navigation } from 'lucide-react'
 import { useEffect, useState } from 'react'
-// import { Label } from "@/components/ui/label"
 
 type Route = {
   id: number
