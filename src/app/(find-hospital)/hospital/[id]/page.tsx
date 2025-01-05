@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Star, MapPin, Phone, Mail, Globe, Search, Filter, Clock, Check } from 'lucide-react'
+import { Star, MapPin, Phone, Mail, Globe, Search, Filter, Clock, Check, Award, Heart, Stethoscope, Building2, MessageSquare } from 'lucide-react'
 
 
 const hospitals = [
@@ -97,196 +97,263 @@ export default function HospitalProfile() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <Card className="shadow-xl rounded-lg">
-        <CardHeader className="border-b bg-white">
-          <div className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8">
-            <img src={hospital.image} alt={hospital.name} className="w-48 h-48 rounded-lg object-cover shadow-md" />
-            <div className="flex-1">
-              <div className="flex items-center space-x-4">
-                <CardTitle className="text-4xl font-bold">{hospital.name}</CardTitle>
-                {hospital.emergencyServices && (
-                  <Badge variant="destructive" className="text-sm">24/7 Emergency</Badge>
-                )}
-              </div>
-              <div className="mt-4 space-y-3">
-                <div className="flex items-center text-muted-foreground">
-                  <MapPin className="mr-2 h-5 w-5" />
-                  <span>{hospital.location}</span>
+      <Card className="shadow-2xl rounded-xl border-none bg-white">
+        {/* Hero Section */}
+        <div className="relative h-48 bg-gradient-to-r from-blue-600 to-blue-800 rounded-t-xl">
+          <div className="absolute -bottom-16 left-8 right-8">
+            <div className="flex flex-col md:flex-row items-start gap-6">
+              <img 
+                src={hospital.image} 
+                alt={hospital.name} 
+                className="w-32 h-32 rounded-xl object-cover ring-4 ring-white shadow-xl"
+              />
+              <div className="flex-1 bg-white p-4 rounded-xl shadow-lg">
+                <div className="flex flex-wrap items-center gap-4">
+                  <h1 className="text-3xl font-bold text-gray-900">{hospital.name}</h1>
+                  {hospital.emergencyServices && (
+                    <Badge variant="destructive" className="text-sm font-semibold">
+                      24/7 Emergency Care
+                    </Badge>
+                  )}
                 </div>
-                <div className="flex items-center text-muted-foreground">
-                  <Star className="mr-2 h-5 w-5 text-yellow-500" />
-                  <span className="font-semibold">{hospital.rating} / 5</span>
-                </div>
-                <div className="flex items-center text-muted-foreground">
-                  <Clock className="mr-2 h-5 w-5" />
-                  <span>₹{hospital.avgCost} average cost</span>
+                <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="flex items-center text-gray-600">
+                    <MapPin className="mr-2 h-5 w-5 text-blue-600" />
+                    <span className="text-sm">{hospital.location}</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <Star className="mr-2 h-5 w-5 text-yellow-500" />
+                    <span className="font-medium">{hospital.rating} / 5</span>
+                    <span className="text-sm ml-1 text-gray-500">(based on patient reviews)</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <Clock className="mr-2 h-5 w-5 text-blue-600" />
+                    <span>Average cost: ₹{hospital.avgCost}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="about" className="space-y-6">
-            <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2">
-              <TabsTrigger value="about" className="text-sm">About</TabsTrigger>
-              <TabsTrigger value="specialties" className="text-sm">Specialties</TabsTrigger>
-              <TabsTrigger value="facilities" className="text-sm">Facilities</TabsTrigger>
-              <TabsTrigger value="doctors" className="text-sm">Doctors</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-sm">Reviews</TabsTrigger>
+        </div>
+
+        <CardContent className="mt-20 pt-8">
+          <Tabs defaultValue="about" className="space-y-8">
+            <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 p-1 bg-gray-100 rounded-lg">
+              {[
+                { value: "about", icon: Building2, label: "About" },
+                { value: "specialties", icon: Stethoscope, label: "Specialties" },
+                { value: "facilities", icon: Award, label: "Facilities" },
+                { value: "doctors", icon: Heart, label: "Doctors" },
+                { value: "reviews", icon: MessageSquare, label: "Reviews" }
+              ].map(tab => (
+                <TabsTrigger 
+                  key={tab.value} 
+                  value={tab.value} 
+                  className="text-sm font-medium px-4 py-2 data-[state=active]:bg-white data-[state=active]:text-blue-600"
+                >
+                  <tab.icon className="w-4 h-4 mr-2" />
+                  {tab.label}
+                </TabsTrigger>
+              ))}
             </TabsList>
 
-            <TabsContent value="about">
-              <div className="space-y-6">
-                <section>
-                  <h3 className="text-2xl font-semibold mb-4">About</h3>
-                  <p className="text-muted-foreground leading-relaxed">{hospital.about}</p>
-                </section>
-                <section>
-                  <h4 className="text-xl font-semibold mb-4">Accreditations</h4>
-                  <div className="grid gap-3">
+            <TabsContent value="about" className="space-y-8">
+              <Card className="border-none shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900">About the Hospital</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 leading-relaxed">{hospital.about}</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-none shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900">Accreditations</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4">
                     {hospital.accreditations.map((accreditation, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span>{accreditation}</span>
+                      <div key={index} className="flex items-center space-x-3 bg-blue-50 p-4 rounded-lg">
+                        <div className="bg-blue-100 p-2 rounded-full">
+                          <Check className="h-5 w-5 text-blue-600" />
+                        </div>
+                        <span className="text-gray-700">{accreditation}</span>
                       </div>
                     ))}
                   </div>
-                </section>
-              </div>
+                </CardContent>
+              </Card>
             </TabsContent>
 
-            <TabsContent value="doctors">
-              <div className="space-y-6">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  <div className="space-y-2">
-                    <Label htmlFor="search-doctors">Search Doctors</Label>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="search-doctors"
-                        className="pl-9"
-                        placeholder="Search by name or specialty"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
+            <TabsContent value="doctors" className="space-y-8">
+              <Card className="border-none shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900">Find a Doctor</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-6 md:grid-cols-3">
+                    <div className="space-y-2">
+                      <Label htmlFor="search-doctors" className="text-sm font-medium">Search Doctors</Label>
+                      <div className="relative">
+                        <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                        <Input
+                          id="search-doctors"
+                          className="pl-9 bg-gray-50 border-gray-200"
+                          placeholder="Search by name or specialty"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="specialty-filter" className="text-sm font-medium">Specialty</Label>
+                      <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
+                        <SelectTrigger id="specialty-filter" className="bg-gray-50 border-gray-200">
+                          <SelectValue placeholder="All Specialties" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Specialties</SelectItem>
+                          {hospital.specialties.map((specialty, index) => (
+                            <SelectItem key={index} value={specialty}>{specialty}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="sort-by" className="text-sm font-medium">Sort By</Label>
+                      <Select value={sortBy} onValueChange={setSortBy}>
+                        <SelectTrigger id="sort-by" className="bg-gray-50 border-gray-200">
+                          <SelectValue placeholder="Sort by" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="rating">Rating</SelectItem>
+                          <SelectItem value="experience">Experience</SelectItem>
+                          <SelectItem value="name">Name</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="specialty-filter">Specialty</Label>
-                    <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
-                      <SelectTrigger id="specialty-filter">
-                        <SelectValue placeholder="All Specialties" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Specialties</SelectItem>
-                        {hospital.specialties.map((specialty, index) => (
-                          <SelectItem key={index} value={specialty}>{specialty}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="sort-by">Sort By</Label>
-                    <Select value={sortBy} onValueChange={setSortBy}>
-                      <SelectTrigger id="sort-by">
-                        <SelectValue placeholder="Sort by" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="rating">Rating</SelectItem>
-                        <SelectItem value="experience">Experience</SelectItem>
-                        <SelectItem value="name">Name</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {filteredDoctors.map((doctor) => (
-                    <Card key={doctor.id} className="hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <div className="flex items-start space-x-4">
-                          <Avatar className="w-16 h-16 border-2 border-primary/10">
-                            <AvatarImage src={doctor.image} alt={doctor.name} />
-                            <AvatarFallback className="bg-primary/5">{doctor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                          </Avatar>
-                          <div className="space-y-1">
-                            <CardTitle className="text-lg">{doctor.name}</CardTitle>
-                            <CardDescription>{doctor.specialty}</CardDescription>
-                            <div className="flex items-center space-x-2">
-                              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                              <span className="font-medium">{doctor.rating}</span>
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-8">
+                    {filteredDoctors.map((doctor) => (
+                      <Card key={doctor.id} className="hover:shadow-lg transition-shadow border border-gray-100">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start space-x-4">
+                            <Avatar className="w-16 h-16 ring-2 ring-blue-100">
+                              <AvatarImage src={doctor.image} alt={doctor.name} />
+                              <AvatarFallback className="bg-blue-50 text-blue-600">
+                                {doctor.name.split(' ').map(n => n[0]).join('')}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="space-y-1">
+                              <CardTitle className="text-lg font-bold">{doctor.name}</CardTitle>
+                              <Badge variant="secondary" className="bg-blue-50 text-blue-700">
+                                {doctor.specialty}
+                              </Badge>
+                              <div className="flex items-center space-x-2">
+                                <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                                <span className="font-medium">{doctor.rating}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">{doctor.experience} experience</p>
-                      </CardContent>
-                      <CardFooter>
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button className="w-full" variant="outline" onClick={() => setSelectedDoctor(doctor)}>
-                              View Profile
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-[425px]">
-                            <DialogHeader>
-                              <DialogTitle>Doctor Profile</DialogTitle>
-                            </DialogHeader>
-                            <div className="grid gap-6 py-4">
-                              <div className="flex items-start gap-4">
-                                <Avatar className="w-24 h-24">
-                                  <AvatarImage src={selectedDoctor?.image} alt={selectedDoctor?.name} />
-                                  <AvatarFallback>{selectedDoctor?.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                                </Avatar>
-                                <div className="space-y-1">
-                                  <h3 className="font-semibold text-lg">{selectedDoctor?.name}</h3>
-                                  <p className="text-muted-foreground">{selectedDoctor?.specialty}</p>
-                                  <div className="flex items-center space-x-2">
-                                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                                    <span>{selectedDoctor?.rating} / 5</span>
+                        </CardHeader>
+                        <CardContent className="pb-4">
+                          <div className="flex items-center text-gray-600">
+                            <Clock className="h-4 w-4 mr-2" />
+                            <span className="text-sm">{doctor.experience} experience</span>
+                          </div>
+                        </CardContent>
+                        <CardFooter>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button 
+                                className="w-full bg-blue-50 text-blue-600 hover:bg-blue-100" 
+                                variant="outline"
+                                onClick={() => setSelectedDoctor(doctor)}
+                              >
+                                View Profile
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[425px]">
+                              <DialogHeader>
+                                <DialogTitle className="text-2xl font-bold">Doctor Profile</DialogTitle>
+                              </DialogHeader>
+                              <div className="grid gap-6 py-4">
+                                <div className="flex items-start gap-4">
+                                  <Avatar className="w-24 h-24 ring-2 ring-blue-100">
+                                    <AvatarImage src={selectedDoctor?.image} alt={selectedDoctor?.name} />
+                                    <AvatarFallback className="bg-blue-50 text-blue-600">
+                                      {selectedDoctor?.name.split(' ').map(n => n[0]).join('')}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div className="space-y-2">
+                                    <h3 className="font-bold text-xl">{selectedDoctor?.name}</h3>
+                                    <Badge variant="secondary" className="bg-blue-50 text-blue-700">
+                                      {selectedDoctor?.specialty}
+                                    </Badge>
+                                    <div className="flex items-center space-x-2">
+                                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                                      <span className="font-medium">{selectedDoctor?.rating} / 5</span>
+                                    </div>
                                   </div>
                                 </div>
+                                <div className="space-y-2">
+                                  <h4 className="font-semibold text-lg">About</h4>
+                                  <p className="text-gray-600">{selectedDoctor?.about}</p>
+                                </div>
+                                <Button 
+                                  asChild
+                                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                                >
+                                  <Link href={`/book-appointment/${hospital.id}/${selectedDoctor?.id}`}>
+                                    Book Appointment
+                                  </Link>
+                                </Button>
                               </div>
-                              <div className="space-y-2">
-                                <h4 className="font-semibold">About</h4>
-                                <p className="text-sm text-muted-foreground">{selectedDoctor?.about}</p>
-                              </div>
-                              <Button asChild>
-                                <Link href={`/book-appointment/${hospital.id}/${selectedDoctor?.id}`}>
-                                  Book Appointment
-                                </Link>
-                              </Button>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                      </CardFooter>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+                            </DialogContent>
+                          </Dialog>
+                        </CardFooter>
+                      </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
 
-            <TabsContent value="reviews">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold">Patient Reviews</h3>
-                <div className="grid gap-4">
-                  {hospital.reviews.map((review) => (
-                    <Card key={review.id} className="bg-muted/50">
-                      <CardContent className="pt-6">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-semibold">{review.patient}</span>
-                          <div className="flex items-center">
-                            <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
-                            <span>{review.rating} / 5</span>
+            <TabsContent value="reviews" className="space-y-6">
+              <Card className="border-none shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900">Patient Reviews</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4">
+                    {hospital.reviews.map((review) => (
+                      <Card key={review.id} className="bg-gray-50 border-none">
+                        <CardContent className="p-6">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center space-x-3">
+                              <Avatar className="w-10 h-10 bg-blue-100">
+                                <AvatarFallback className="text-blue-600">
+                                  {review.patient[0]}
+                                </AvatarFallback>
+                              </Avatar>
+                              <span className="font-semibold">{review.patient}</span>
+                            </div>
+                            <div className="flex items-center bg-white px-3 py-1 rounded-full">
+                              <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
+                              <span className="font-medium">{review.rating} / 5</span>
+                            </div>
                           </div>
-                        </div>
-                        <p className="text-muted-foreground">{review.comment}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+                          <p className="text-gray-600">{review.comment}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </CardContent>

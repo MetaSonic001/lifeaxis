@@ -295,6 +295,9 @@ export default function FindDoctors() {
                             </div>
                           </Tabs>
                         </div>
+                        <Button asChild className="w-full bg-blue-600 text-white">
+                    <Link href={`/book-appointment/null/${selectedDoctor?.id}`}>Book Appointment</Link>
+                  </Button>
                       </DialogContent>
                     </Dialog>
                   </CardFooter>
