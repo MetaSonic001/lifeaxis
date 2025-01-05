@@ -24,12 +24,12 @@ const availableSlots = [
   { id: 6, time: "04:00 PM", price: 180 },
 ]
 
-export default function BookAppointment() {
-  const params = useParams()
-  const router = useRouter()
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
-  const [selectedSlot, setSelectedSlot] = useState<string | undefined>(undefined)
-  const [doctor, setDoctor] = useState<any | null>(null)
+  export default function BookAppointment() {
+    const params = useParams()
+    const router = useRouter()
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
+    const [selectedSlot, setSelectedSlot] = useState<string | undefined>(undefined)
+    const [doctor, setDoctor] = useState<any | null>(null)
 
   useEffect(() => {
     if (params.doctorId === 'null') {
@@ -40,12 +40,12 @@ export default function BookAppointment() {
     }
   }, [params.doctorId, router])
 
-  const handleBooking = () => {
-    if (selectedDate && selectedSlot) {
-      const slot = availableSlots.find(s => s.id.toString() === selectedSlot)
-      router.push(`/appointment-details/${params.hospitalId}/${params.doctorId}?date=${selectedDate.toISOString()}&slot=${slot?.time}&price=${slot?.price}`)
+    const handleBooking = () => {
+      if (selectedDate && selectedSlot) {
+        const slot = availableSlots.find(s => s.id.toString() === selectedSlot)
+        router.push(`/appointment-details/${params.hospitalId}/${params.doctorId}?date=${selectedDate.toISOString()}&slot=${slot?.time}&price=${slot?.price}`)
+      }
     }
-  }
 
   if (!doctor) {
     return (
