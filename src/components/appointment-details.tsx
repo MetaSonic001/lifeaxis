@@ -6,7 +6,25 @@ import { PatientProfile } from "@/components/patient-profile"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 
-export function AppointmentDetails({ appointment, onClose }) {
+interface Appointment {
+  patient: {
+    name: string;
+    id: string;
+    dob: string;
+    contact: string;
+    address: string;
+  };
+  time: string;
+  hospital: string;
+  type: string;
+}
+
+interface AppointmentDetailsProps {
+  appointment: Appointment;
+  onClose: () => void;
+}
+
+export function AppointmentDetails({ appointment, onClose }: AppointmentDetailsProps) {
   const [showPatientDetails, setShowPatientDetails] = useState(false)
   const [prescription, setPrescription] = useState("")
   const [reportSummary, setReportSummary] = useState("")

@@ -12,9 +12,9 @@ import { useState } from 'react'
 import { Badge } from "@/components/ui/badge"
 
 const appointments = [
-  { id: 1, time: "09:00 AM", patient: { id: 1, name: "John Doe", priority: "critical" }, hospital: "City Hospital", type: "In-person" },
-  { id: 2, time: "10:30 AM", patient: { id: 2, name: "Jane Smith", priority: "chronic" }, hospital: "Metro Clinic", type: "Online" },
-  { id: 3, time: "02:00 PM", patient: { id: 3, name: "Bob Johnson", priority: "regular" }, hospital: "Central Hospital", type: "In-person" },
+  { id: 1, time: "09:00 AM", patient: { id: "1", name: "John Doe", priority: "critical", dob: "01/01/1980", contact: "123-456-7890", address: "123 Main St" }, hospital: "City Hospital", type: "In-person" },
+  { id: 2, time: "10:30 AM", patient: { id: "2", name: "Jane Smith", priority: "chronic", dob: "02/02/1990", contact: "987-654-3210", address: "456 Elm St" }, hospital: "Metro Clinic", type: "Online" },
+  { id: 3, time: "02:00 PM", patient: { id: "3", name: "Bob Johnson", priority: "regular", dob: "03/03/1975", contact: "555-555-5555", address: "789 Oak St" }, hospital: "Central Hospital", type: "In-person" },
 ]
 
 const getPriorityColor = (priority: string) => {
@@ -26,8 +26,13 @@ const getPriorityColor = (priority: string) => {
   }
 }
 
-export function AppointmentList({ onSelectAppointment, onSelectPatient }) {
-  const [selectedAppointment, setSelectedAppointment] = useState(null)
+interface AppointmentListProps {
+  onSelectAppointment?: (appointment: any) => void;
+  onSelectPatient?: (patient: any) => void;
+}
+
+export function AppointmentList({ onSelectAppointment, onSelectPatient }: AppointmentListProps) {
+  const [selectedAppointment, setSelectedAppointment] = useState<null | typeof appointments[0]>(null)
 
   return (
     <>

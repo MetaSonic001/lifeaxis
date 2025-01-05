@@ -66,8 +66,8 @@ export default function BookAppointment() {
               <div className="flex items-center space-x-4 mb-4">
                 <Avatar className="w-20 h-20">
                   <AvatarImage src={doctor.image} alt={doctor.name} />
-                  <AvatarFallback>{doctor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                </Avatar>
+                  <AvatarFallback>{doctor.name.split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
                 <div>
                   <h2 className="text-xl font-semibold">{doctor.name}</h2>
                   <p className="text-gray-600">{doctor.specialty}</p>

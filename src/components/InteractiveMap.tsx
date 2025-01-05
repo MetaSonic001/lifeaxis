@@ -12,9 +12,17 @@ const mockProviders = [
 ]
 
 export default function InteractiveMap() {
-  const [selectedProvider, setSelectedProvider] = useState(null)
+  const [selectedProvider, setSelectedProvider] = useState<{ id: number; name: string; type: string; lat: number; lng: number } | null>(null)
 
-  const handleSearch = (e) => {
+  interface Provider {
+    id: number;
+    name: string;
+    type: string;
+    lat: number;
+    lng: number;
+  }
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     // In a real application, this would trigger a search based on the input
     console.log('Searching for providers...')

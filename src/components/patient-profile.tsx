@@ -10,7 +10,20 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { MedicalRecords } from "@/components/medical-records"
 
-export function PatientProfile({ patient, onClose }) {
+interface Patient {
+  id: string;
+  name: string;
+  dob: string;
+  contact: string;
+  address: string;
+}
+
+interface PatientProfileProps {
+  patient: Patient;
+  onClose: () => void;
+}
+
+export function PatientProfile({ patient, onClose }: PatientProfileProps) {
   const [activeTab, setActiveTab] = useState("overview")
   const [chatMessages, setChatMessages] = useState([
     { sender: 'Doctor', message: 'Hello, how can I help you today?' },
