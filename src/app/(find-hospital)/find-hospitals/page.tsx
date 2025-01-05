@@ -15,11 +15,11 @@ export default function FindHospitals() {
   const [location, setLocation] = useState('all')
   const [specialty, setSpecialty] = useState('all')
   const hospitals = [
-    { id: 1, name: "City General Hospital", location: "Downtown", specialties: ["Cardiology", "Neurology", "Orthopedics"], avgCost: 1500, rating: 4.5, emergencyServices: true, image: "/placeholder.svg?height=100&width=100" },
-    { id: 2, name: "Sunrise Medical Center", location: "Uptown", specialties: ["Pediatrics", "Obstetrics", "Oncology"], avgCost: 1800, rating: 4.7, emergencyServices: true, image: "/placeholder.svg?height=100&width=100" },
-    { id: 3, name: "Green Valley Clinic", location: "Suburbs", specialties: ["Family Medicine", "Dermatology", "Psychiatry"], avgCost: 1200, rating: 4.3, emergencyServices: false, image: "/placeholder.svg?height=100&width=100" },
-    { id: 4, name: "Tech Health Institute", location: "Midtown", specialties: ["Cardiology", "Neurology", "Oncology"], avgCost: 2000, rating: 4.8, emergencyServices: true, image: "/placeholder.svg?height=100&width=100" },
-    { id: 5, name: "Harbor View Hospital", location: "Waterfront", specialties: ["Orthopedics", "Rehabilitation", "Sports Medicine"], avgCost: 1700, rating: 4.6, emergencyServices: true, image: "/placeholder.svg?height=100&width=100" },
+    { id: 1, name: "City General Hospital", location: "Downtown", specialties: ["Cardiology", "Neurology", "Orthopedics"], avgCost: 1500, rating: 4.5, emergencyServices: true, image: "https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+    { id: 2, name: "Sunrise Medical Center", location: "Uptown", specialties: ["Pediatrics", "Obstetrics", "Oncology"], avgCost: 1800, rating: 4.7, emergencyServices: true, image: "https://images.pexels.com/photos/20242798/pexels-photo-20242798/free-photo-of-corner-of-white-residential-building.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" },
+    { id: 3, name: "Green Valley Clinic", location: "Suburbs", specialties: ["Family Medicine", "Dermatology", "Psychiatry"], avgCost: 1200, rating: 4.3, emergencyServices: false, image: "https://images.pexels.com/photos/20902709/pexels-photo-20902709/free-photo-of-ambulance-driving-up-to-the-hospital.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+    { id: 4, name: "Tech Health Institute", location: "Midtown", specialties: ["Cardiology", "Neurology", "Oncology"], avgCost: 2000, rating: 4.8, emergencyServices: true, image: "https://images.pexels.com/photos/668299/pexels-photo-668299.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+    { id: 5, name: "Harbor View Hospital", location: "Waterfront", specialties: ["Orthopedics", "Rehabilitation", "Sports Medicine"], avgCost: 1700, rating: 4.6, emergencyServices: true, image: "https://images.pexels.com/photos/9703033/pexels-photo-9703033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
   ]
   
   const filteredHospitals = hospitals.filter(hospital => 

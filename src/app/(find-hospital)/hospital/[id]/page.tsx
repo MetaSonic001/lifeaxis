@@ -24,7 +24,7 @@ const hospitals = [
     avgCost: 2500,
     rating: 4.5,
     emergencyServices: true,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     about: "Lilavati Hospital is a leading multi-specialty healthcare provider in Mumbai, offering state-of-the-art medical facilities and a team of experienced healthcare professionals. Established in 1978, we have been at the forefront of medical innovation and patient care for over four decades.",
     facilities: [
       "24/7 Emergency Care",
@@ -42,7 +42,7 @@ const hospitals = [
       "ISO 9001:2015 Certification"
     ],
     doctors: [
-      { id: 1, name: "Dr. Priya Sharma", specialty: "Cardiologist", image: "/placeholder.svg?height=100&width=100", rating: 4.8, experience: "15 years", about: "Dr. Priya Sharma is a board-certified cardiologist with over 15 years of experience in treating various heart conditions. She specializes in preventive cardiology and heart failure management." },
+      { id: 1, name: "Dr. Priya Sharma", specialty: "Cardiologist", image: "https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=600", rating: 4.8, experience: "15 years", about: "Dr. Priya Sharma is a board-certified cardiologist with over 15 years of experience in treating various heart conditions. She specializes in preventive cardiology and heart failure management." },
       { id: 2, name: "Dr. Rajesh Mehta", specialty: "Neurologist", image: "/placeholder.svg?height=100&width=100", rating: 4.7, experience: "12 years", about: "Dr. Rajesh Mehta is a highly skilled neurologist specializing in the diagnosis and treatment of complex neurological disorders. With 12 years of experience, he has helped numerous patients manage conditions such as epilepsy, stroke, and neurodegenerative diseases." },
       { id: 3, name: "Dr. Anjali Desai", specialty: "Orthopedic Surgeon", image: "/placeholder.svg?height=100&width=100", rating: 4.9, experience: "18 years", about: "Dr. Anjali Desai is an experienced orthopedic surgeon with 18 years of practice. She specializes in joint replacement surgeries, sports medicine, and minimally invasive procedures, helping patients regain mobility and improve their quality of life." },
       { id: 4, name: "Dr. Sunil Patel", specialty: "Pediatrician", image: "/placeholder.svg?height=100&width=100", rating: 4.6, experience: "10 years", about: "Dr. Sunil Patel is a compassionate pediatrician with 10 years of experience in providing comprehensive care for children from infancy through adolescence. He is known for his gentle approach and expertise in childhood development and preventive care." },

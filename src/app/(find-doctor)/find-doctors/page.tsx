@@ -340,7 +340,7 @@ export default function FindDoctors() {
         avgFee: 1500, 
         rating: 4.8, 
         location: "Bandra", 
-        image: "/placeholder.svg?height=100&width=100", 
+        image: "https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=600", 
         experience: "15 years", 
         about: "Dr. Priya Sharma is a renowned cardiologist with over 15 years of experience in treating various heart conditions. She specializes in preventive cardiology and heart failure management.",
         education: [
@@ -375,7 +375,7 @@ export default function FindDoctors() {
         avgFee: 2000, 
         rating: 4.7, 
         location: "Andheri West", 
-        image: "/placeholder.svg?height=100&width=100", 
+        image: "https://images.pexels.com/photos/14797917/pexels-photo-14797917.jpeg?auto=compress&cs=tinysrgb&w=600", 
         experience: "12 years", 
         about: "Dr. Amit Desai is a highly skilled orthopedic surgeon specializing in sports medicine and joint replacement. With 12 years of experience, he has helped numerous patients regain mobility and improve their quality of life.",
         education: [
