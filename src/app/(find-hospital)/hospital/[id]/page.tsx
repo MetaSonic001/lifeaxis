@@ -138,7 +138,7 @@ export default function HospitalProfile() {
 
         <CardContent className="mt-20 pt-8">
           <Tabs defaultValue="about" className="space-y-8">
-            <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 p-1 bg-gray-100 rounded-lg">
+            <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 bg-gray-100 rounded-lg">
               {[
                 { value: "about", icon: Building2, label: "About" },
                 { value: "specialties", icon: Stethoscope, label: "Specialties" },
@@ -149,7 +149,7 @@ export default function HospitalProfile() {
                 <TabsTrigger 
                   key={tab.value} 
                   value={tab.value} 
-                  className="text-sm font-medium px-4 py-2 data-[state=active]:bg-white data-[state=active]:text-blue-600"
+                  className="text-sm font-medium px-4 py-1 data-[state=active]:bg-white data-[state=active]:text-blue-600"
                 >
                   <tab.icon className="w-4 h-4 mr-2" />
                   {tab.label}
@@ -308,7 +308,10 @@ export default function HospitalProfile() {
                                   asChild
                                   className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                                 >
-                                  <Link href={`/book-appointment/${hospital.id}/${selectedDoctor?.id}`}>
+                                  {/* <Link href={`/book-appointment/${hospital.id}/${selectedDoctor?.id}`}>
+                                    Book Appointment
+                                  </Link> */}
+                                                                    <Link href={`/book-appointment/${hospital.id}/2`}>
                                     Book Appointment
                                   </Link>
                                 </Button>
