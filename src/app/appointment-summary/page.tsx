@@ -1,27 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const dynamic = 'force-dynamic';
 
-export default function AppointmentSummary() {
+// Separate component that uses useSearchParams
+function AppointmentContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [paramsLoaded, setParamsLoaded] = useState(false);
 
-  useEffect(() => {
-    if (!searchParams) {
-      router.push('/'); // Redirect if no query params
-      return;
-    }
-    setParamsLoaded(true);
-  }, [searchParams, router]);
-
-  if (!paramsLoaded) {
-    return <p>Loading...</p>;
+  if (!searchParams) {
+    router.push('/');
+    return null;
   }
 
   const appointmentDetails = {
@@ -49,25 +42,34 @@ export default function AppointmentSummary() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">Appointment Summary</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <p><strong>Date:</strong> {appointmentDetails.date}</p>
-            <p><strong>Time:</strong> {appointmentDetails.slot}</p>
-            <p><strong>Price:</strong> ${appointmentDetails.price}</p>
-            <p><strong>Reason for Visit:</strong> {appointmentDetails.reason}</p>
-            <p><strong>Additional Information:</strong> {appointmentDetails.additionalInfo}</p>
-            <div className="flex space-x-4">
-              <Button onClick={handleEdit}>Edit Details</Button>
-              <Button onClick={handleConfirm}>Confirm and Pay</Button>
-            </div>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">Appointment Summary</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          <p><strong>Date:</strong> {appointmentDetails.date}</p>
+          <p><strong>Time:</strong> {appointmentDetails.slot}</p>
+          <p><strong>Price:</strong> ${appointmentDetails.price}</p>
+          <p><strong>Reason for Visit:</strong> {appointmentDetails.reason}</p>
+          <p><strong>Additional Information:</strong> {appointmentDetails.additionalInfo}</p>
+          <div className="flex space-x-4">
+            <Button onClick={handleEdit}>Edit Details</Button>
+            <Button onClick={handleConfirm}>Confirm and Pay</Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Main component with Suspense boundary
+export default function AppointmentSummary() {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <Suspense fallback={<p>Loading appointment details...</p>}>
+        <AppointmentContent />
+      </Suspense>
     </div>
   );
 }
