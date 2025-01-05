@@ -25,33 +25,33 @@ const availableSlots = [
   { id: 6, time: "04:00 PM", price: 180 },
 ]
 
-export default function BookAppointment() {
-  const params = useParams()
-  const router = useRouter()
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
-  const [selectedSlot, setSelectedSlot] = useState<string | undefined>(undefined)
-  const [doctor, setDoctor] = useState<any | null>(null)
+  export default function BookAppointment() {
+    const params = useParams()
+    const router = useRouter()
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
+    const [selectedSlot, setSelectedSlot] = useState<string | undefined>(undefined)
+    const [doctor, setDoctor] = useState<any | null>(null)
 
-  useEffect(() => {
-    if (params.doctorId === 'null') {
-      router.push('/find-doctors')
-    } else {
-      // In a real application, you would fetch the doctor data from an API
-      const foundDoctor = doctors.find(d => d.id === params.doctorId)
-      setDoctor(foundDoctor || null)
+    useEffect(() => {
+      if (params.doctorId === 'null') {
+        router.push('/find-doctors')
+      } else {
+        // In a real application, you would fetch the doctor data from an API
+        const foundDoctor = doctors.find(d => d.id === params.doctorId)
+        setDoctor(foundDoctor || null)
+      }
+    }, [params.doctorId, router])
+
+    const handleBooking = () => {
+      if (selectedDate && selectedSlot) {
+        const slot = availableSlots.find(s => s.id.toString() === selectedSlot)
+        router.push(`/appointment-details/${params.hospitalId}/${params.doctorId}?date=${selectedDate.toISOString()}&slot=${slot?.time}&price=${slot?.price}`)
+      }
     }
-  }, [params.doctorId, router])
 
-  const handleBooking = () => {
-    if (selectedDate && selectedSlot) {
-      const slot = availableSlots.find(s => s.id.toString() === selectedSlot)
-      router.push(`/appointment-details/${params.hospitalId}/${params.doctorId}?date=${selectedDate.toISOString()}&slot=${slot?.time}&price=${slot?.price}`)
+    if (!doctor) {
+      return <div>Loading...</div>
     }
-  }
-
-  if (!doctor) {
-    return <div>Loading...</div>
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">

@@ -151,7 +151,7 @@ export default function FindDoctors() {
                   ₹{doctor.avgFee} consultation fee
                 </div>
               </CardContent>
-              <CardFooter className="pt-4">
+              <CardFooter className="pt-4 flex gap-2">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button 
@@ -291,13 +291,19 @@ export default function FindDoctors() {
                         
                                 ))}
                                 </div>
+                                
                               </TabsContent>
+                              <Button asChild className="w-full mt-6 bg-gray-900 hover:bg-gray-800 text-white py-6 text-lg font-semibold">
+                                <Link href={`/doctor/${doctor.id}`}>Book Appointment</Link>
+                              </Button>
                             </div>
                           </Tabs>
                         </div>
                       </DialogContent>
                     </Dialog>
+                    
                   </CardFooter>
+                  
                 </Card>
               ))}
             </div>
