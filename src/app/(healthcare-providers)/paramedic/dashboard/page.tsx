@@ -20,7 +20,6 @@ export default function ParamedicDashboard() {
 
   const features = [
     { name: 'Smart Dispatch System', icon: Truck, href: '/paramedic/smart-dispatch' },
-    { name: 'Incident Report Generator', icon: FileText, href: '/paramedic/incident-report' },
     { name: 'Dynamic GPS Navigation', icon: Map, href: '/paramedic/gps-navigation' },
     { name: 'Portable Diagnostic Kit', icon: Briefcase, href: '/paramedic/diagnostic-kit' },
   ]

@@ -8,19 +8,19 @@ const testimonials = [
     name: 'Sarah Thompson',
     role: 'Patient',
     image: '/testimonial1.jpg',
-    quote: 'DocDial has revolutionized how I manage my healthcare. The ease of booking appointments and accessing my medical records is incredible.',
+    quote: 'LifeAxis has revolutionized how I manage my healthcare. The ease of booking appointments and accessing my medical records is incredible.',
   },
   {
     name: 'Dr. Michael Chen',
     role: 'Cardiologist',
     image: '/testimonial2.jpg',
-    quote: 'As a healthcare provider, DocDial has streamlined my practice and improved patient care. The platform is intuitive and efficient.',
+    quote: 'As a healthcare provider, LifeAxis has streamlined my practice and improved patient care. The platform is intuitive and efficient.',
   },
   {
     name: 'Emily Rodriguez',
     role: 'Mother of Two',
     image: '/testimonial3.jpg',
-    quote: 'The telemedicine feature on DocDial has been a lifesaver for my family. We can consult with doctors without leaving our home.',
+    quote: 'The telemedicine feature on LifeAxis has been a lifesaver for my family. We can consult with doctors without leaving our home.',
   },
 ]
 

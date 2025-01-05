@@ -11,10 +11,10 @@ export default function Header() {
           <div className="flex items-center">
             <img
               src="/favicon.ico"
-              alt="DocDial Logo"
+              alt="LifeAxis Logo"
               className="h-10 w-auto mr-4"
             />
-            <h1 className="text-2xl font-bold text-blue-800">DocDial</h1>
+            <h1 className="text-2xl font-bold text-blue-800">LifeAxis</h1>
           </div>
           <nav className="hidden lg:flex space-x-6">
             <a

@@ -7,7 +7,7 @@ import "../../globals.css"
 
 export const metadata: Metadata = {
   title: "HealthSync - Doctor's Dashboard",
-  description: "Streamline your medical practice with DocDial",
+  description: "Streamline your medical practice with LifeAxis",
 }
 
 export default function RootLayout({

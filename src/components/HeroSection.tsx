@@ -24,7 +24,7 @@ export default function HeroSection() {
                 Your Health, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-blue-400">Our Priority</span>
               </h1>
               <p className="text-xl text-blue-100">
-                Experience healthcare reimagined with DocDial. Connect with top doctors, schedule appointments, and take control of your health journey.
+                Experience healthcare reimagined with LifeAxis. Connect with top doctors, schedule appointments, and take control of your health journey.
               </p>
             </div>
 

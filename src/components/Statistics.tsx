@@ -22,7 +22,7 @@ export default function Statistics() {
           ))}
         </div>
         <p className="text-center text-xl text-gray-600 mt-12">
-          Join the growing community of patients and healthcare providers who trust DocDial for their medical needs.
+          Join the growing community of patients and healthcare providers who trust LifeAxis for their medical needs.
         </p>
       </div>
     </section>

@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">DocDial</h3>
+            <h3 className="text-lg font-semibold mb-4">LifeAxis</h3>
             <p className="text-gray-400">Your trusted healthcare partner, connecting you with the best doctors and medical services.</p>
           </div>
           <div>
@@ -46,7 +46,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400">&copy; {new Date().getFullYear()} DocDial. All rights reserved.</p>
+          <p className="text-gray-400">&copy; {new Date().getFullYear()} LifeAxis. All rights reserved.</p>
         </div>
       </div>
     </footer>

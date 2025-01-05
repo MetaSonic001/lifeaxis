@@ -73,7 +73,7 @@ export function AdminLayout({ children, activePage }: AdminLayoutProps) {
                 <Building2 className="h-4 w-4 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-semibold">DocDial</span>
+                <span className="text-lg font-semibold">LifeAxis</span>
                 <span className="text-xs text-gray-500">Admin Dashboard</span>
               </div>
             </div>

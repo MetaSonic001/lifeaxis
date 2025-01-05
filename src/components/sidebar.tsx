@@ -36,7 +36,7 @@ export function Sidebar() {
       <div className="flex flex-col space-y-2 py-4">
         <div className="px-3 py-2">
           <h2 className="mb-2 hidden px-4 text-lg font-semibold tracking-tight md:block">
-            DocDial
+            LifeAxis
           </h2>
           <div className="space-y-1">
             {sidebarItems.map((item) => (

@@ -1,4 +1,4 @@
-import Sidebar from '@/components/Sidebar'
+import Sidebar from '@/components/Sidebar-MH'
 
 const sidebarItems = [
   { name: 'Dashboard', href: '/paramedic/dashboard' },
