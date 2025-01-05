@@ -1,24 +1,27 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+export const dynamic = 'force-dynamic';
 
 export default function AppointmentSummary() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [isEditing, setIsEditing] = useState(false)
-  const [paramsLoaded, setParamsLoaded] = useState(false)
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [paramsLoaded, setParamsLoaded] = useState(false);
 
   useEffect(() => {
-    if (searchParams) {
-      setParamsLoaded(true)
+    if (!searchParams) {
+      router.push('/'); // Redirect if no query params
+      return;
     }
-  }, [searchParams])
+    setParamsLoaded(true);
+  }, [searchParams, router]);
 
   if (!paramsLoaded) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   const appointmentDetails = {
@@ -31,24 +34,19 @@ export default function AppointmentSummary() {
     price: searchParams.get('price') || 'N/A',
     reason: searchParams.get('reason') || 'N/A',
     additionalInfo: searchParams.get('additionalInfo') || 'N/A',
-  }
+  };
 
   const handleEdit = () => {
-    setIsEditing(true)
-    router.back()
-  }
+    router.back();
+  };
 
   const handleConfirm = () => {
-    if (
-      !appointmentDetails.hospitalId ||
-      !appointmentDetails.doctorId ||
-      !appointmentDetails.date
-    ) {
-      alert('Some required details are missing.')
-      return
+    if (!appointmentDetails.hospitalId || !appointmentDetails.doctorId || !appointmentDetails.date) {
+      alert('Some required details are missing.');
+      return;
     }
-    router.push('/booking-confirmation')
-  }
+    router.push('/booking-confirmation');
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -71,5 +69,5 @@ export default function AppointmentSummary() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

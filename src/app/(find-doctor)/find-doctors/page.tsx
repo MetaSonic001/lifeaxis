@@ -18,7 +18,7 @@ export default function FindDoctors() {
   const [specialty, setSpecialty] = useState('all')
   const [location, setLocation] = useState('all')
   const [sortBy, setSortBy] = useState('rating')
-  const [selectedDoctor, setSelectedDoctor] = useState(null)
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null)
 
   const filteredDoctors = useMemo(() => {
     return doctors
@@ -306,7 +306,26 @@ export default function FindDoctors() {
       )
     }
     
-    const doctors = [
+    interface Doctor {
+      id: number;
+      name: string;
+      specialty: string;
+      hospital: string;
+      avgFee: number;
+      rating: number;
+      location: string;
+      image: string;
+      experience: string;
+      about: string;
+      education: string[];
+      services: string[];
+      languages: string[];
+      awards: string[];
+      publications: string[];
+      testimonials: { patient: string; rating: number; comment: string }[];
+    }
+
+    const doctors: Doctor[] = [
       { 
         id: 1, 
         name: "Dr. Priya Sharma", 

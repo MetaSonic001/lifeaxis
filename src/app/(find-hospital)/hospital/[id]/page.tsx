@@ -61,17 +61,22 @@ export default function HospitalProfile() {
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('rating')
-  const [selectedDoctor, setSelectedDoctor] = useState(null)
+  const [selectedDoctor, setSelectedDoctor] = useState<{
+    id: number;
+    name: string;
+    specialty: string;
+    image: string;
+    rating: number;
+    experience: string;
+    about: string;
+  } | null>(null)
   const params = useParams()
   const router = useRouter()
   const hospitalId = params.id as string
   const hospital = hospitals.find(h => h.id === hospitalId)
 
-  if (!hospital) {
-    return <div>Hospital not found</div>
-  }
-
   const filteredDoctors = useMemo(() => {
+    if (!hospital) return []
     return hospital.doctors
       .filter(doctor => 
         (selectedSpecialty === 'all' || doctor.specialty === selectedSpecialty) &&
@@ -84,7 +89,11 @@ export default function HospitalProfile() {
         if (sortBy === 'experience') return parseInt(b.experience) - parseInt(a.experience)
         return 0
       })
-  }, [hospital.doctors, selectedSpecialty, searchTerm, sortBy])
+  }, [hospital, selectedSpecialty, searchTerm, sortBy])
+
+  if (!hospital) {
+    return <div>Hospital not found</div>
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">

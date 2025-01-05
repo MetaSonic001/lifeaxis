@@ -13,18 +13,52 @@ export default function AppointmentDetails() {
   const searchParams = useSearchParams()
   const [reason, setReason] = useState('')
   const [additionalInfo, setAdditionalInfo] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = () => {
-    const appointmentDetails = {
-      hospitalId: params.hospitalId,
-      doctorId: params.doctorId,
-      date: searchParams.get('date'),
-      slot: searchParams.get('slot'),
-      price: searchParams.get('price'),
-      reason,
-      additionalInfo
+  const handleSubmit = async () => {
+    // Validate required parameters
+    if (!reason.trim()) {
+      alert('Please provide a reason for your appointment.')
+      return
     }
-    router.push(`/appointment-summary?${new URLSearchParams(appointmentDetails as any).toString()}`)
+
+    const hospitalId = params.hospitalId || searchParams.get('hospitalId')
+    const doctorId = params.doctorId || searchParams.get('doctorId')
+    const date = searchParams.get('date')
+    const slot = searchParams.get('slot')
+    const price = searchParams.get('price')
+
+    if (!hospitalId || !doctorId || !date || !slot || !price) {
+      alert('Missing essential appointment details. Please go back and try again.')
+      return
+    }
+
+    const appointmentDetails = {
+      hospitalId,
+      doctorId,
+      date,
+      slot,
+      price,
+      reason,
+      additionalInfo,
+    }
+
+    const queryString = new URLSearchParams(
+      Object.entries(appointmentDetails).reduce((acc, [key, value]) => {
+        acc[key] = Array.isArray(value) ? value.join(',') : value;
+        return acc;
+      }, {} as Record<string, string>)
+    ).toString()
+
+    try {
+      setIsLoading(true)
+      await router.push(`/appointment-summary?${queryString}`)
+    } catch (error) {
+      console.error('Navigation error:', error)
+      alert('Failed to navigate to the summary page. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -53,11 +87,12 @@ export default function AppointmentDetails() {
                 onChange={(e) => setAdditionalInfo(e.target.value)}
               />
             </div>
-            <Button onClick={handleSubmit}>Review Appointment</Button>
+            <Button onClick={handleSubmit} disabled={isLoading}>
+              {isLoading ? 'Loading...' : 'Review Appointment'}
+            </Button>
           </div>
         </CardContent>
       </Card>
     </div>
   )
 }
-
