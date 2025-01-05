@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,15 +9,28 @@ export default function AppointmentSummary() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isEditing, setIsEditing] = useState(false)
+  const [paramsLoaded, setParamsLoaded] = useState(false)
+
+  useEffect(() => {
+    if (searchParams) {
+      setParamsLoaded(true)
+    }
+  }, [searchParams])
+
+  if (!paramsLoaded) {
+    return <p>Loading...</p>
+  }
 
   const appointmentDetails = {
-    hospitalId: searchParams.get('hospitalId'),
-    doctorId: searchParams.get('doctorId'),
-    date: new Date(searchParams.get('date') as string).toLocaleDateString(),
-    slot: searchParams.get('slot'),
-    price: searchParams.get('price'),
-    reason: searchParams.get('reason'),
-    additionalInfo: searchParams.get('additionalInfo')
+    hospitalId: searchParams.get('hospitalId') || 'N/A',
+    doctorId: searchParams.get('doctorId') || 'N/A',
+    date: searchParams.get('date')
+      ? new Date(searchParams.get('date') as string).toLocaleDateString()
+      : 'N/A',
+    slot: searchParams.get('slot') || 'N/A',
+    price: searchParams.get('price') || 'N/A',
+    reason: searchParams.get('reason') || 'N/A',
+    additionalInfo: searchParams.get('additionalInfo') || 'N/A',
   }
 
   const handleEdit = () => {
@@ -26,8 +39,14 @@ export default function AppointmentSummary() {
   }
 
   const handleConfirm = () => {
-    // Here you would typically send the appointment details to your backend
-    // For now, we'll just simulate a successful booking
+    if (
+      !appointmentDetails.hospitalId ||
+      !appointmentDetails.doctorId ||
+      !appointmentDetails.date
+    ) {
+      alert('Some required details are missing.')
+      return
+    }
     router.push('/booking-confirmation')
   }
 
@@ -54,4 +73,3 @@ export default function AppointmentSummary() {
     </div>
   )
 }
-
