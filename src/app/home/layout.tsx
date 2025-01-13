@@ -21,7 +21,8 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: "LifeAxis",
-  description: "Created by LifeAxis Team",};
+  description: "Created by LifeAxis Team",
+};
 
 export default function RootLayout({
   children,
@@ -30,19 +31,19 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    {/* <html lang="en"> */}
+      {/* <html lang="en"> */}
       {/* <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > */}
-        <SignedOut>
+      {/* <SignedOut>
           <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        {children}
+        </SignedOut> */}
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+      {children}
       {/* </body> */}
-    {/* </html> */}
+      {/* </html> */}
     </ClerkProvider>
   );
 }
