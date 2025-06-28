@@ -10,12 +10,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Brain, FileText, Activity, Heart, Home, Menu, ChevronLeft, ChevronRight, BarChart3 } from "lucide-react"
 
 const navigationItems = [
-  {
-    title: "Overview",
-    href: "/wellness-tools",
-    icon: Home,
-    description: "Wellness tools dashboard",
-  },
+  // {
+  //   title: "Overview",
+  //   href: "/wellness-tools",
+  //   icon: Home,
+  //   description: "Wellness tools dashboard",
+  // },
   {
     title: "Mindful Minutes",
     href: "/wellness-tools/mindful-minutes",
@@ -28,18 +28,18 @@ const navigationItems = [
     icon: FileText,
     description: "Track daily symptoms",
   },
-  {
-    title: "Habits Tracker",
-    href: "/wellness-tools/healthy-habits-tracker",
-    icon: Activity,
-    description: "Monitor wellness habits",
-  },
-    {
-    title: "First Aid Quiz",
-    href: "/wellness-tools/first-aid-quiz-game",
-    icon: Heart,
-    description: "Learn emergency skills",
-  },
+  // {
+  //   title: "Habits Tracker",
+  //   href: "/wellness-tools/healthy-habits-tracker",
+  //   icon: Activity,
+  //   description: "Monitor wellness habits",
+  // },
+  //   {
+  //   title: "First Aid Quiz",
+  //   href: "/wellness-tools/first-aid-quiz-game",
+  //   icon: Heart,
+  //   description: "Learn emergency skills",
+  // },
   {
     title: "Go to Main Page",
     href: "/home",
