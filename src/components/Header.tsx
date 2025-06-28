@@ -11,16 +11,13 @@ export default function Header() {
   const navLinks = [
     { href: "/find-doctors", label: "Find Doctors" },
     { href: "/find-hospitals", label: "Hospitals" },
-<<<<<<< HEAD
+
     // { href: "#", label: "Services" },
     // { href: "#", label: "Lab Tests" },
     // { href: "#", label: "Health Records" },
     { href: "/wellness-tools", label: "Wellness Tools" },
-=======
-    { href: "#", label: "Services" },
-    { href: "#", label: "Lab Tests" },
-    { href: "#", label: "Health Records" },
->>>>>>> 5f030bd489e4b5c64a4dfbd78549bdd102dc9609
+
+
   ];
 
   return (
