@@ -9,23 +9,25 @@ import Link from 'next/link';
 export default function HeroSection() {
   const stats = [
     { icon: Users, label: "Patients Served", value: "100k+" },
-    { icon: Star, label: "Rating", value: "4.9/5" },
+    { icon: Star, label: "Rating", value: "4.9/5" },  
     { icon: Shield, label: "Verified Doctors", value: "1000+" }
   ];
 
   return (
-    <section className="relative bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-[#FFFFFF]-to-[#F8F2ED] text-white py-24 overflow-hidden shadow-sm shadow-gray-300 rounded-md p-20 ">
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2 space-y-8">
             <div className="space-y-6">
-              <div className="inline-block px-4 py-2 bg-blue-800/50 rounded-full">
-                <span className="text-blue-200 font-medium">🏥 #1 Healthcare Platform</span>
+              <div className="inline-block px-4 py-2 bg-blue-800 rounded-full">
+                <span className="text-blue-100 font-medium">🏥 #1 Healthcare Platform</span>
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Your Health, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-blue-400">Our Priority</span>
-              </h1>
-              <p className="text-xl text-blue-100">
+              
+              
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                  <span className="bg-gradient-to-r from-slate-700 via-blue-700 to-indigo-700 bg-clip-text text-transparent">Your Health, Our Priority</span>
+                </h1>
+              <p className="text-xl text-slate-700">
                 Experience healthcare reimagined with LifeAxis. Connect with top doctors, schedule appointments, and take control of your health journey.
               </p>
             </div>
@@ -60,10 +62,10 @@ export default function HeroSection() {
 
             <div className="grid grid-cols-3 gap-4">
               {stats.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                  <Icon className="w-6 h-6 mx-auto mb-2 text-blue-300" />
-                  <p className="font-bold text-xl">{value}</p>
-                  <p className="text-sm text-blue-200">{label}</p>
+                <div key={label} className="text-center p-4 bg-white/60 rounded-xl backdrop-blur-sm">
+                  <Icon className="w-6 h-6 mx-auto mb-2 text-blue-600" />
+                  <p className="font-bold text-xl text-black">{value}</p>
+                  <p className="text-sm text-blue-600">{label}</p>
                 </div>
               ))}
             </div>
@@ -76,13 +78,13 @@ export default function HeroSection() {
                 alt="Professional Doctor"
                 className="w-full h-auto rounded-2xl shadow-2xl object-cover"
               />
-              <Card className="absolute -bottom-6 -right-6 w-64 bg-white/10 backdrop-blur-xl border-white/20">
+              <Card className="absolute -bottom-6 -right-6 w-64 bg-white/70 backdrop-blur-xl border-white/20">
                 <CardContent className="p-4">
                   <div className="flex items-center">
                     <Clock className="w-10 h-10 text-green-400 mr-4" />
                     <div>
                       <p className="text-2xl font-bold">24/7</p>
-                      <p className="text-sm text-blue-200">Medical Support</p>
+                      <p className="text-sm text-blue-600">Medical Support</p>
                     </div>
                   </div>
                 </CardContent>

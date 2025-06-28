@@ -11,6 +11,7 @@ export default function Header() {
   const navLinks = [
     { href: "/find-doctors", label: "Find Doctors" },
     { href: "/find-hospitals", label: "Hospitals" },
+
     // { href: "#", label: "Services" },
     // { href: "#", label: "Lab Tests" },
     // { href: "#", label: "Health Records" },
