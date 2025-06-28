@@ -10,11 +10,12 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "#", label: "Find Doctors" },
-    { href: "#", label: "Hospitals" },
-    { href: "#", label: "Services" },
-    { href: "#", label: "Lab Tests" },
-    { href: "#", label: "Health Records" },
+    { href: "/find-doctors", label: "Find Doctors" },
+    { href: "/find-hospitals", label: "Hospitals" },
+    // { href: "#", label: "Services" },
+    // { href: "#", label: "Lab Tests" },
+    // { href: "#", label: "Health Records" },
+    { href: "/wellness-tools", label: "Wellness Tools" },
   ];
 
   return (
