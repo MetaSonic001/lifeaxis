@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from 'react';
 import { Search, Menu, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,10 +11,16 @@ export default function Header() {
   const navLinks = [
     { href: "/find-doctors", label: "Find Doctors" },
     { href: "/find-hospitals", label: "Hospitals" },
+<<<<<<< HEAD
     // { href: "#", label: "Services" },
     // { href: "#", label: "Lab Tests" },
     // { href: "#", label: "Health Records" },
     { href: "/wellness-tools", label: "Wellness Tools" },
+=======
+    { href: "#", label: "Services" },
+    { href: "#", label: "Lab Tests" },
+    { href: "#", label: "Health Records" },
+>>>>>>> 5f030bd489e4b5c64a4dfbd78549bdd102dc9609
   ];
 
   return (
@@ -24,25 +29,25 @@ export default function Header() {
         {/* Main header row */}
         <div className="flex items-center justify-between">
           {/* Logo section */}
-          <div className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img
               src="/favicon.ico"
               alt="LifeAxis Logo"
               className="h-8 w-auto mr-2 md:h-10 md:mr-4"
             />
             <h1 className="text-xl md:text-2xl font-bold text-blue-800">LifeAxis</h1>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="text-gray-600 hover:text-blue-800 transition duration-150 ease-in-out"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -60,7 +65,7 @@ export default function Header() {
 
             {/* Authentication buttons - responsive */}
             <div className="hidden sm:flex space-x-2">
-              <Link href="/sign-in">
+              <Link href="/admin">
                 <Button
                   variant="outline"
                   className="text-blue-800 border-blue-800 hover:bg-blue-50"
@@ -82,7 +87,7 @@ export default function Header() {
                   Patient Portal
                 </Button>
               </Link>
-              <Link href="/doctor-portal">
+              <Link href="/doctor">
                 <Button
                   variant="outline"
                   className="text-blue-800 border-blue-800 hover:bg-blue-50"
@@ -121,24 +126,24 @@ export default function Header() {
               {/* Mobile navigation */}
               <nav className="flex flex-col space-y-2">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.label}
                     href={link.href}
                     className="text-gray-600 hover:text-blue-800 py-2 transition duration-150 ease-in-out"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
               </nav>
 
               {/* Mobile portal buttons */}
               <div className="flex flex-col space-y-2">
-                <Link href="/patient-portal">
+                <Link href="/book-appointment">
                   <Button className="w-full bg-blue-800 text-white hover:bg-blue-900">
                     Patient Portal
                   </Button>
                 </Link>
-                <Link href="/doctor-portal">
+                <Link href="/doctor">
                   <Button
                     variant="outline"
                     className="w-full text-blue-800 border-blue-800 hover:bg-blue-50"
@@ -154,3 +159,4 @@ export default function Header() {
     </header>
   );
 }
+

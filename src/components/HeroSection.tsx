@@ -1,8 +1,10 @@
+"use client";
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, Calendar, Video, Clock, Star, Shield, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const stats = [
@@ -35,19 +37,25 @@ export default function HeroSection() {
                   placeholder="Search doctors, specialties, hospitals..."
                   className="flex-grow border-none bg-white/90 text-gray-800 placeholder:text-gray-500"
                 />
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6">
-                  <Search className="mr-2 h-4 w-4" /> Search
-                </Button>
+                <Link href="/find-doctors">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6">
+                    <Search className="mr-2 h-4 w-4" /> Search
+                  </Button>
+                </Link>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 shadow-lg transform transition hover:-translate-y-1">
-                <Calendar className="mr-2 h-5 w-5" /> Book Appointment
-              </Button>
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 shadow-lg transform transition hover:-translate-y-1">
-                <Video className="mr-2 h-5 w-5" /> Virtual Consultation
-              </Button>
+              <Link href="/find-hospitals">
+                <Button size="lg" className="bg-green-600 hover:bg-green-700 shadow-lg transform transition hover:-translate-y-1">
+                  <Calendar className="mr-2 h-5 w-5" /> Book Appointment
+                </Button>
+              </Link>
+              <Link href="/find-doctors">
+                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 shadow-lg transform transition hover:-translate-y-1">
+                  <Video className="mr-2 h-5 w-5" /> Virtual Consultation
+                </Button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -63,7 +71,7 @@ export default function HeroSection() {
 
           <div className="lg:w-1/2 relative">
             <div className="relative">
-              <img 
+              <img
                 src="https://images.pexels.com/photos/8376232/pexels-photo-8376232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Professional Doctor"
                 className="w-full h-auto rounded-2xl shadow-2xl object-cover"
@@ -88,6 +96,25 @@ export default function HeroSection() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
       <div className="absolute -bottom-8 left-20 w-96 h-96 bg-green-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </section>
   );
 }
+
