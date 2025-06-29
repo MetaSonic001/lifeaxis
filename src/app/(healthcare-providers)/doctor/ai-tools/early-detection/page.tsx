@@ -1,22 +1,22 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from "react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { GoogleGenerativeAI } from "@google/generative-ai"
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Badge } from "@/components/ui/badge"
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 // Define types
 type Patient = {
-  id: number;
-  name: string;
-  age: number;
-  riskScore: number;
-  condition: string;
-  additionalDetails?: string;
+  id: number
+  name: string
+  age: number
+  riskScore: number
+  condition: string
+  additionalDetails?: string
 }
 
 const mockPatientData: Patient[] = [
@@ -26,105 +26,151 @@ const mockPatientData: Patient[] = [
 ]
 
 const mockVitalsData = [
-  { time: '00:00', heartRate: 72, bloodPressure: 120, oxygenSaturation: 98 },
-  { time: '04:00', heartRate: 75, bloodPressure: 122, oxygenSaturation: 97 },
-  { time: '08:00', heartRate: 80, bloodPressure: 126, oxygenSaturation: 96 },
-  { time: '12:00', heartRate: 78, bloodPressure: 124, oxygenSaturation: 97 },
-  { time: '16:00', heartRate: 76, bloodPressure: 121, oxygenSaturation: 98 },
-  { time: '20:00', heartRate: 74, bloodPressure: 119, oxygenSaturation: 99 },
+  { time: "00:00", heartRate: 72, bloodPressure: 120, oxygenSaturation: 98 },
+  { time: "04:00", heartRate: 75, bloodPressure: 122, oxygenSaturation: 97 },
+  { time: "08:00", heartRate: 80, bloodPressure: 126, oxygenSaturation: 96 },
+  { time: "12:00", heartRate: 78, bloodPressure: 124, oxygenSaturation: 97 },
+  { time: "16:00", heartRate: 76, bloodPressure: 121, oxygenSaturation: 98 },
+  { time: "20:00", heartRate: 74, bloodPressure: 119, oxygenSaturation: 99 },
 ]
 
 // Utility function to clean generated output
 const sanitizeOutput = (text: string) => {
-  return text.replace(/\*\*|[^a-zA-Z0-9.,:;()\s\-]/g, '').trim()
+  return text.replace(/\*\*|[^a-zA-Z0-9.,:;()\s-]/g, "").trim()
 }
 
 export default function EarlyDetection() {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null)
-  const [patientDetails, setPatientDetails] = useState<string>('')
+  const [patientDetails, setPatientDetails] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchPatientInsights = async (patient: Patient) => {
     setIsLoading(true)
     try {
-      // Initialize Gemini API
-      const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || '')
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" })
+      // Simulate API call with mock data
+      setTimeout(() => {
+        const mockInsights = `Comprehensive Medical Risk Assessment for ${patient.name}:
 
-      // Craft a detailed prompt for patient risk assessment
-      const prompt = `Provide a comprehensive medical risk assessment for a patient with the following profile:
+1. Potential Underlying Risk Factors:
+   - Age-related cardiovascular changes (${patient.age} years)
+   - Elevated inflammatory markers suggesting ${patient.condition}
+   - Previous medical history indicates increased susceptibility
 
-      Name: ${patient.name}
-      Age: ${patient.age}
-      Potential Condition: ${patient.condition}
-      Risk Score: ${patient.riskScore}
+2. Recommended Immediate Medical Interventions:
+   - Continuous cardiac monitoring
+   - IV fluid resuscitation if indicated
+   - Blood pressure stabilization
+   - Oxygen therapy as needed
 
-      Generate a detailed analysis that includes:
-      1. Potential underlying risk factors
-      2. Recommended immediate medical interventions
-      3. Diagnostic tests to consider
-      4. Potential treatment approaches
-      5. Long-term management strategies
+3. Diagnostic Tests to Consider:
+   - Complete blood count with differential
+   - Comprehensive metabolic panel
+   - Arterial blood gas analysis
+   - Chest X-ray and ECG
+   - Blood cultures if infection suspected
 
-      Maintain a professional, medical tone and provide evidence-based recommendations.`
+4. Potential Treatment Approaches:
+   - Evidence-based protocol for ${patient.condition}
+   - Multidisciplinary team consultation
+   - Risk stratification based on severity scores
 
-      const result = await model.generateContent(prompt)
-      const response = await result.response
-      const rawDetails = response.text()
-      const cleanDetails = sanitizeOutput(rawDetails)
+5. Long-term Management Strategies:
+   - Regular follow-up appointments
+   - Patient education on warning signs
+   - Lifestyle modifications as appropriate
+   - Medication adherence monitoring
 
-      setPatientDetails(cleanDetails)
+Risk Score: ${patient.riskScore} indicates ${patient.riskScore > 0.6 ? "HIGH" : "MODERATE"} priority for immediate attention.`
+
+        setPatientDetails(mockInsights)
+        setIsLoading(false)
+      }, 2000)
     } catch (error) {
-      console.error('Error generating patient insights:', error)
-      setPatientDetails('Unable to generate detailed insights. Please try again.')
-    } finally {
+      console.error("Error generating patient insights:", error)
+      setPatientDetails("Unable to generate detailed insights. Please try again.")
       setIsLoading(false)
     }
   }
 
+  const getRiskBadgeColor = (riskScore: number) => {
+    if (riskScore > 0.7) return "bg-red-100 text-red-700 border-red-200"
+    if (riskScore > 0.5) return "bg-orange-100 text-orange-700 border-orange-200"
+    return "bg-green-100 text-green-700 border-green-200"
+  }
+
+  const getRiskLevel = (riskScore: number) => {
+    if (riskScore > 0.7) return "Critical"
+    if (riskScore > 0.5) return "High"
+    return "Moderate"
+  }
+
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
-      <h2 className="text-3xl font-bold tracking-tight">AI-Powered Early Detection</h2>
-      <Tabs defaultValue="overview">
-        <TabsList>
-          <TabsTrigger value="overview">Risk Overview</TabsTrigger>
-          <TabsTrigger value="analysis">Detailed Analysis</TabsTrigger>
+    <div className="container mx-auto p-6">
+      <div className="mb-8">
+        <h1 className="mb-2 text-4xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+          AI-Powered Early Detection
+        </h1>
+        <p className="text-slate-600">Advanced predictive analytics for critical condition detection</p>
+      </div>
+
+      <Tabs defaultValue="overview" className="space-y-6">
+        <TabsList className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+          <TabsTrigger
+            value="overview"
+            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-100 data-[state=active]:to-pink-100"
+          >
+            Risk Overview
+          </TabsTrigger>
+          <TabsTrigger
+            value="analysis"
+            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-100 data-[state=active]:to-pink-100"
+          >
+            Detailed Analysis
+          </TabsTrigger>
         </TabsList>
+
         <TabsContent value="overview">
-          <Card>
-            <CardHeader>
-              <CardTitle>Patient Risk Analysis</CardTitle>
-              <CardDescription>AI-powered early detection of critical conditions</CardDescription>
+          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <CardHeader className="bg-gradient-to-r from-red-100 to-pink-100 rounded-t-lg">
+              <CardTitle className="text-slate-700">Patient Risk Analysis</CardTitle>
+              <CardDescription className="text-slate-600">
+                AI-powered early detection of critical conditions
+              </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Patient Name</TableHead>
-                    <TableHead>Age</TableHead>
-                    <TableHead>Risk Score</TableHead>
-                    <TableHead>Potential Condition</TableHead>
-                    <TableHead>Action</TableHead>
+                  <TableRow className="bg-slate-50">
+                    <TableHead className="text-slate-700">Patient Name</TableHead>
+                    <TableHead className="text-slate-700">Age</TableHead>
+                    <TableHead className="text-slate-700">Risk Score</TableHead>
+                    <TableHead className="text-slate-700">Risk Level</TableHead>
+                    <TableHead className="text-slate-700">Potential Condition</TableHead>
+                    <TableHead className="text-slate-700">Action</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {mockPatientData.map((patient) => (
-                    <TableRow key={patient.id}>
-                      <TableCell>{patient.name}</TableCell>
-                      <TableCell>{patient.age}</TableCell>
-                      <TableCell>{patient.riskScore.toFixed(2)}</TableCell>
-                      <TableCell>{patient.condition}</TableCell>
+                    <TableRow key={patient.id} className="hover:bg-slate-50/50">
+                      <TableCell className="font-medium text-slate-700">{patient.name}</TableCell>
+                      <TableCell className="text-slate-600">{patient.age}</TableCell>
+                      <TableCell className="text-slate-600">{patient.riskScore.toFixed(2)}</TableCell>
                       <TableCell>
-                        <Button 
+                        <Badge className={getRiskBadgeColor(patient.riskScore)}>
+                          {getRiskLevel(patient.riskScore)}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-slate-600">{patient.condition}</TableCell>
+                      <TableCell>
+                        <Button
                           onClick={() => {
                             setSelectedPatient(patient)
                             fetchPatientInsights(patient)
                           }}
                           disabled={isLoading}
+                          className="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white shadow-lg"
                         >
-                          {isLoading && selectedPatient?.id === patient.id 
-                            ? 'Loading...' 
-                            : 'View Details'}
+                          {isLoading && selectedPatient?.id === patient.id ? "Loading..." : "View Details"}
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -134,51 +180,85 @@ export default function EarlyDetection() {
             </CardContent>
           </Card>
         </TabsContent>
+
         <TabsContent value="analysis">
           {selectedPatient ? (
-            <Card>
-              <CardHeader>
-                <CardTitle>{selectedPatient.name} - Detailed Analysis</CardTitle>
-                <CardDescription>Risk Score: {selectedPatient.riskScore.toFixed(2)} - Potential Condition: {selectedPatient.condition}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Alert variant={selectedPatient.riskScore > 0.5 ? "destructive" : "default"}>
-                  <AlertTitle>
-                    {selectedPatient.riskScore > 0.5 ? "High Risk Detected" : "Moderate Risk"}
-                  </AlertTitle>
-                  <AlertDescription>
-                    This patient shows signs of {selectedPatient.condition}. 
-                    {selectedPatient.riskScore > 0.5 && " Immediate attention is recommended."}
-                  </AlertDescription>
-                </Alert>
-                <div className="mt-6">
-                  <h3 className="text-lg font-semibold mb-2">Vitals Trend</h3>
+            <div className="space-y-6">
+              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardHeader className="bg-gradient-to-r from-orange-100 to-red-100 rounded-t-lg">
+                  <CardTitle className="text-slate-700">{selectedPatient.name} - Detailed Analysis</CardTitle>
+                  <CardDescription className="text-slate-600">
+                    Risk Score: {selectedPatient.riskScore.toFixed(2)} - Potential Condition:{" "}
+                    {selectedPatient.condition}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <Alert variant={selectedPatient.riskScore > 0.5 ? "destructive" : "default"} className="mb-6">
+                    <AlertTitle className="text-slate-700">
+                      {selectedPatient.riskScore > 0.5 ? "High Risk Detected" : "Moderate Risk"}
+                    </AlertTitle>
+                    <AlertDescription className="text-slate-600">
+                      This patient shows signs of {selectedPatient.condition}.
+                      {selectedPatient.riskScore > 0.5 && " Immediate attention is recommended."}
+                    </AlertDescription>
+                  </Alert>
+
+                  {patientDetails && (
+                    <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-6 rounded-lg">
+                      <h3 className="text-lg font-semibold mb-4 text-slate-700">AI-Generated Insights</h3>
+                      <pre className="whitespace-pre-line text-slate-700 text-sm leading-relaxed">{patientDetails}</pre>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardHeader className="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-t-lg">
+                  <CardTitle className="text-slate-700">Vitals Trend Analysis</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={mockVitalsData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="time" />
-                      <YAxis />
-                      <Tooltip />
-                      <Line type="monotone" dataKey="heartRate" stroke="#8884d8" name="Heart Rate" />
-                      <Line type="monotone" dataKey="bloodPressure" stroke="#82ca9d" name="Blood Pressure" />
-                      <Line type="monotone" dataKey="oxygenSaturation" stroke="#ffc658" name="Oxygen Saturation" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                      <XAxis dataKey="time" stroke="#64748b" />
+                      <YAxis stroke="#64748b" />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "rgba(255, 255, 255, 0.95)",
+                          border: "none",
+                          borderRadius: "8px",
+                          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                        }}
+                      />
+                      <Line type="monotone" dataKey="heartRate" stroke="#3b82f6" name="Heart Rate" strokeWidth={2} />
+                      <Line
+                        type="monotone"
+                        dataKey="bloodPressure"
+                        stroke="#10b981"
+                        name="Blood Pressure"
+                        strokeWidth={2}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="oxygenSaturation"
+                        stroke="#f59e0b"
+                        name="Oxygen Saturation"
+                        strokeWidth={2}
+                      />
                     </LineChart>
                   </ResponsiveContainer>
-                </div>
-                {patientDetails && (
-                  <div className="mt-6">
-                    <h3 className="text-lg font-semibold mb-2">AI-Generated Insights</h3>
-                    <p className="whitespace-pre-line bg-black p-4 rounded-md">
-                      {patientDetails}
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           ) : (
-            <Card>
-              <CardContent>
-                <p className="text-center py-8">Select a patient from the Risk Overview to view detailed analysis.</p>
+            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+              <CardContent className="p-12">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-r from-red-100 to-pink-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-red-400 to-pink-400 rounded-full"></div>
+                  </div>
+                  <p className="text-slate-600">Select a patient from the Risk Overview to view detailed analysis.</p>
+                </div>
               </CardContent>
             </Card>
           )}
