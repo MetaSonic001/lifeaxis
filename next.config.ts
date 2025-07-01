@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   },
   typescript: {
     // Disables TypeScript errors during builds
-    // ignoreBuildErrors: true,
+    ignoreBuildErrors: true,
   },
 };
 

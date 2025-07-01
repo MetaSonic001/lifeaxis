@@ -120,7 +120,7 @@ export default function NurseDashboard() {
       bgColor: "from-rose-50 to-rose-100",
     },
     {
-      name: "Rounding Assistant",
+      name: "Rounding Assistants",
       href: "/nurse/rounding-assistant",
       icon: Clipboard,
       description: "Patient rounds",
@@ -136,8 +136,8 @@ export default function NurseDashboard() {
     { id: 4, patient: "Alice Brown", room: "104A", message: "Vital signs stable", time: "12 min ago", severity: "low" },
   ]
 
-  const handleAlertClick = (alert: (typeof recentAlerts)[0]) => {
-    alert(`Alert for ${alert.patient} in room ${alert.room}: ${alert.message}`)
+  const handleAlertClick = (alertItem: (typeof recentAlerts)[0]) => {
+    window.alert(`Alert for ${alertItem.patient} in room ${alertItem.room}: ${alertItem.message}`)
   }
 
   const handleRefreshData = () => {
