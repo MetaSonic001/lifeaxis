@@ -269,7 +269,7 @@ export default function AppointmentsPage() {
           <Card>
             <CardContent className="p-12 text-center">
               <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-600">No appointments found</h3>
+              <h3 className="text-lg font-semibold text-gray-600">No appointment found</h3>
               <p className="text-gray-500">Schedule your first appointment to get started</p>
             </CardContent>
           </Card>
